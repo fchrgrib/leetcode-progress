@@ -1,19 +1,17 @@
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        map<pair<int, int>, int> dp;
+        if(m==1 && n ==1) return 1;
+        vector<vector<int>> dp (m, vector<int>(n, 0));
+        for(int i = n-2;i>=0;i--) dp[m-1][i] = 1;
+        for(int i = m-2;i>=0;i--) dp[i][n-1] = 1;
 
-        for(int i = n;i>0;i--){
-            for(int j = 1;j<=m;j++){
-                if(j == 1){
-                    dp[{i, j}] = 1;
-                    continue;
-                }
-                int temp1 = dp[{i+1, j}], temp2 = dp[{i, j-1}];
-                if(temp1 || temp2) dp[{i,j}] = temp1+temp2;
+        for(int i = m-2;i>=0;i--){
+            for(int j = n-2;j>=0;j--){
+                dp[i][j] = dp[i+1][j]+dp[i][j+1];
             }
         }
 
-        return dp[{1, m}];
+        return dp[0][0];
     }
 };
