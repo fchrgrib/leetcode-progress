@@ -9,7 +9,7 @@ public:
         int water = 0;
 
         while (left < right) {
-            if (height[left] < height[right]) {
+            if (height[left] <= height[right]) {
                 left++;
                 left_max = max(left_max, height[left]);
                 water += max(0, left_max - height[left]);
