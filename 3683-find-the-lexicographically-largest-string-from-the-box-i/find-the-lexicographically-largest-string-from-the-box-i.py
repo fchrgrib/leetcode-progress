@@ -9,7 +9,6 @@ class Solution(object):
             return word
         l = len(word) - numFriends + 1
         maxS = ""
-        print(l)
 
         for i in range(len(word)):
             maxS = max(maxS, word[i:i+l])
