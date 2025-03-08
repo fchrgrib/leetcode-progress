@@ -14,7 +14,6 @@ class Solution:
         
         res = 2**31
         sum = 0
-        i = 0
         for i in range(n):
             if i>= k:
                 if blocks[i-k] == "W":
@@ -23,7 +22,6 @@ class Solution:
                 sum+=1
             if i>= k-1:
                 res = min(res, sum)
-        print(i)
         return res
 
 
