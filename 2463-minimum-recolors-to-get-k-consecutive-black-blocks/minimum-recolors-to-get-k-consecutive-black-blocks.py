@@ -15,9 +15,8 @@ class Solution:
         res = 2**31
         sum = 0
         for i in range(n):
-            if i>= k:
-                if blocks[i-k] == "W":
-                    sum-=1
+            if i>= k and blocks[i-k] == "W":
+                sum-=1
             if blocks[i] == "W":
                 sum+=1
             if i>= k-1:
