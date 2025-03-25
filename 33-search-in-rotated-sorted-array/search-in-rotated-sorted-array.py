@@ -7,12 +7,7 @@ class Solution:
             m = (l+r)//2
             t1 = m-1
             t2 = m+1
-
-            # if nums[m]>nums[r] and nums[r]>target:
-            #         l = t2
-            # else:
-            #         r = t1
-            # print(nums[m])
+            
             if nums[m] == target:
                 return m
             if nums[l] == target:
