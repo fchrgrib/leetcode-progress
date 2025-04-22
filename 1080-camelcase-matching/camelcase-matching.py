@@ -14,6 +14,8 @@ class Solution:
                     i2+=1
                     i1+=1
                     continue
+                if i2>=n2 and l1[i1].isupper():
+                    return False
                 if l1[i1].isupper():
                     i2 = 0
                 i1+=1
