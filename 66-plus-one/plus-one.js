@@ -3,24 +3,18 @@
  * @return {number[]}
  */
 var plusOne = function(digits) {
-    let sum = 0;
     let l = digits.length;
 
     for (let i = l-1;i>=0;i--){
-        if(digits[i] === 9){
-            digits[i] = 0;
-            sum = 1
-        }else{
+        if(digits[i] < 9){
             digits[i]++;
-            sum = 0
+            return digits;
         }
 
-        if(sum === 0 ) break
+        digits[i] = 0;
     }
     
 
-    if (digits[0] === 0){
-        digits.unshift(1)
-    }
+    digits.unshift(1)
     return digits
 };
