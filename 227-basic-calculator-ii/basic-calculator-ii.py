@@ -1,28 +1,59 @@
 class Solution:
     def calculate(self, s: str) -> int:
-        num = 0
-        res = 0
-        last_num = 0
-        last_op = '+'
-        
-        for i, c in enumerate(s):
-            if c.isdigit():
-                num = num * 10 + int(c)
+        sign = 1
+        num = res = 0
+        symb = []
+        md = []
+
+        def md_res(md, symb, num):
+            if len(md) == 0:
+                return 0
             
-            if c in "+-*/" or i == len(s) - 1:
-                if last_op == '+':
-                    res += last_num
-                    last_num = num
-                elif last_op == '-':
-                    res += last_num
-                    last_num = -num
-                elif last_op == '*':
-                    last_num = last_num * num
-                elif last_op == '/':
-                    last_num = int(last_num / num)
+            res = md[0]
+            for i in range(len(md)):
+                if i < len(md)-1:
+                    tmp_next = md[i+1]
+                else:
+                    tmp_next = num
                 
-                last_op = c
+                if symb[i] == "*":
+                    res*=tmp_next
+                else:
+                    res=int(res/tmp_next)
+            return res
+
+
+
+        for c in s:
+            if c.isspace():
+                continue
+            
+            if c == "+" or c == "-":
+                num*=sign
+                sign = 1 if c == "+" else -1
+                if len(md)>0:
+                    res+= md_res(md, symb, num)
+                    md.clear()
+                    symb.clear()
+                else:
+                    res+=num
                 num = 0
+                continue
+            if c == "*" or c=="/":
+                md.append(num*sign)
+                symb.append(c)
+                num = 0
+                sign = 1
+                continue
+            num = num*10 + int(c)
         
-        res += last_num
+        if len(md)>0:
+            res+= md_res(md, symb, num)
+            md.clear()
+            symb.clear()
+            num = 0
+        if num != 0:
+            res+=(sign*num)
         return res
+                
+                
