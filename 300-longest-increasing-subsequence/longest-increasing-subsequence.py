@@ -3,11 +3,17 @@ class Solution:
         tails = []
         
         for num in nums:
-            if not tails or num > tails[-1]:
+            left, right = 0, len(tails)
+            while left < right:
+                mid = (left + right) // 2
+                if tails[mid] < num:
+                    left = mid + 1
+                else:
+                    right = mid
+            
+            if left == len(tails):
                 tails.append(num)
             else:
-                idx = bisect_left(tails, num)
-                tails[idx] = num
+                tails[left] = num
                 
         return len(tails)
-        
