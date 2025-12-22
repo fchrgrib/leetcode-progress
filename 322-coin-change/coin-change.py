@@ -1,15 +1,24 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [float("inf") for _ in range(amount+1)]
-        dp[0] = 0
+        if amount == 0:
+            return 0
+            
+        queue = deque([(0, 0)])
+        visited = {0}
         
-        for i in range(1,amount+1):
-            for j in coins:
-                tmp = i - j
-                if tmp<0:
-                    continue
-                dp[i] = min(dp[i], dp[i-j] + 1)
-        
-        return dp[amount] if dp[amount] != float("inf") else -1
+        while queue:
+            current_sum, steps = queue.popleft()
+            
+            for coin in coins:
+                next_sum = current_sum + coin
+                
+                if next_sum == amount:
+                    return steps + 1
+                
+                if next_sum < amount and next_sum not in visited:
+                    visited.add(next_sum)
+                    queue.append((next_sum, steps + 1))
+                    
+        return -1
             
         
