@@ -7,7 +7,6 @@
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
         max_val = float("-inf")
-        global res
         res = 0
 
         def dfs(root, max_val):
@@ -15,7 +14,7 @@ class Solution:
                 return
             
             if root.val >= max_val:
-                global res
+                nonlocal res
                 res+=1
                 max_val = root.val
             
