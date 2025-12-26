@@ -9,7 +9,7 @@ class Solution:
                 continue
             
 
-            while len(res)>0 and res[-1]>s[i] and i < last_letter[res[-1]]:
+            while res and res[-1]>s[i] and i < last_letter[res[-1]]:
                 letter_used.remove(res.pop())
             res.append(s[i])
             letter_used.add(s[i])
