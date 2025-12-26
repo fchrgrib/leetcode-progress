@@ -2,10 +2,7 @@ class Solution:
     def removeDuplicateLetters(self, s: str) -> str:
         res = []
         letter_used = set()
-        last_letter = {}
-
-        for i in range(len(s)):
-            last_letter[s[i]] = i
+        last_letter = {c: i for i, c in enumerate(s)}
 
         for i in range(len(s)):
             if s[i] in letter_used:
