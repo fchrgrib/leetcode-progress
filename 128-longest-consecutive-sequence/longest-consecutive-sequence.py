@@ -2,25 +2,18 @@ class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
         if len(nums) == 0:
             return 0
-        visited = set()
-        max_seq = float("-inf")
-        nums = set(nums)
+        num_set = set(nums)
+        longest_streak = 0
         
-        for i in nums:
-            if i in visited:
-                continue
-            curr_seq = 1
-            tmp_i = i
-            visited.add(i)
-            while (tmp_i+1) in nums:
-                tmp_i+=1
-                curr_seq+=1
-                visited.add(tmp_i)
-            tmp_i = i
-            while (tmp_i-1) in nums:
-                tmp_i-=1
-                curr_seq+=1
-                visited.add(tmp_i)
-            max_seq = max(max_seq, curr_seq)
-        return max_seq
+        for num in num_set:
+            if (num - 1) not in num_set:
+                current_num = num
+                current_streak = 1
+                
+                while (current_num + 1) in num_set:
+                    current_num += 1
+                    current_streak += 1
+                
+                longest_streak = max(longest_streak, current_streak)
+        return longest_streak
         
