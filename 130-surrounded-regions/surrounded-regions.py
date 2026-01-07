@@ -1,58 +1,38 @@
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
-        """
-        Do not return anything, modify board in-place instead.
-        """
-        queue = deque()
-        r = len(board)
-        c = len(board[0])
-        direct = [(1,0), (-1,0), (0,1), (0,-1)]
-        visited = set()
+        if not board or not board[0]:
+            return
 
-        for i in range(c):
-            if board[0][i] == "O":
-                queue.append((0, i))
+        r, c = len(board), len(board[0])
+        q = []
+        dirs = [(1,0), (-1,0), (0,1), (0,-1)]
+
         for i in range(r):
-            if board[i][0] == "O":
-                queue.append((i, 0))
-        for i in range(c-1, -1, -1):
-            if board[r-1][i] == "O":
-                queue.append((r-1, i))
-        for i in range(r-1, -1, -1):
-            if board[i][c-1] == "O":
-                queue.append((i, c-1))
-        while queue:
-            tmp = queue.popleft()
-            if tmp in visited:
+            for j in (0, c - 1):
+                if board[i][j] == "O":
+                    q.append((i, j))
+
+        for j in range(c):
+            for i in (0, r - 1):
+                if board[i][j] == "O":
+                    q.append((i, j))
+
+        idx = 0
+        while idx < len(q):
+            x, y = q[idx]
+            idx += 1
+            if board[x][y] != "O":
                 continue
-            visited.add(tmp)
 
-            for x, y in direct:
-                ix = tmp[0]+x
-                iy = tmp[1]+y
-                if ix<0 or ix>=r or iy<0 or iy>=c:
-                    continue
-                if board[ix][iy] == "O":
-                    queue.append((ix, iy))
-
-
+            board[x][y] = "#"
+            for dx, dy in dirs:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < r and 0 <= ny < c and board[nx][ny] == "O":
+                    q.append((nx, ny))
 
         for i in range(r):
             for j in range(c):
-                if board[i][j] == "O" and (i, j) not in visited:
-                    queue.append((i,j))
-
-                    while queue:
-                        tmp = queue.popleft()
-                        board[tmp[0]][tmp[1]] = "X"
-
-                        for x, y in direct:
-                            ix = tmp[0]+x
-                            iy = tmp[1]+y
-                            if ix<0 or ix>=r or iy<0 or iy>=c:
-                                continue
-                            if board[ix][iy] == "O":
-                                board[ix][iy] = "X"
-                                queue.append((ix, iy))
-
-        
+                if board[i][j] == "O":
+                    board[i][j] = "X"
+                elif board[i][j] == "#":
+                    board[i][j] = "O"
