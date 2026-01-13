@@ -1,12 +1,11 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        queue = deque()
         r, c, lw = len(board), len(board[0]), len(word)
         visited = set()
         direct = [(0,1), (0,-1), (1,0), (-1,0)]
 
         def dfs(coor, idx):
-            nonlocal word, board, direct, visited, lw
+            nonlocal word, board, direct, visited, lw, r, c
             x, y = coor
             tmp = False
             for i, j in direct:
