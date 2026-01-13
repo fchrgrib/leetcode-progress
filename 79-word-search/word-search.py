@@ -34,27 +34,6 @@ class Solution:
                     visited.add(vis)
                     if dfs(vis, 0):
                         return True
-                    visited.remove(vis)
-                    # queue.append([(i,j), 0])
-                    # while queue:
-                    #     tmp = queue.popleft()
-                    #     if tmp[0] in visited:
-                    #         continue
-                    #     visited.add(tmp[0])
-
-                    #     for k in direct:
-                    #         dx = tmp[0][0] + k[0]
-                    #         dy = tmp[0][1] + k[1]
-
-                    #         if dx<0 or dy<0 or dy>=c or dx>=r:
-                    #             continue
-                            
-                    #         if board[dx][dy] == word[tmp[1]+1] and (dx, dy) not in visited:
-                    #             if tmp[1]+1 == lw-1:
-                    #                 return True
-                    #             queue.append([(dx, dy), tmp[1]+1])
-                    # visited.clear()
-
-
+                    visited.clear()
         return False
         
