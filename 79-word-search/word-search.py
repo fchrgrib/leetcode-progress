@@ -7,7 +7,6 @@ class Solution:
         def dfs(coor, idx):
             nonlocal word, board, direct, visited, lw, r, c
             x, y = coor
-            tmp = False
             for i, j in direct:
                 dx, dy = x+i, y+j
                 vis = (dx, dy)
@@ -18,9 +17,10 @@ class Solution:
                     if idx+1 == lw-1:
                         return True
                     visited.add(vis)
-                    tmp|=dfs(vis, idx+1)
+                    if dfs(vis, idx+1):
+                        return True
                     visited.remove(vis)
-            return tmp
+            return False
 
 
 
