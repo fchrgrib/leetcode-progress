@@ -1,18 +1,14 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
-        far_idx = {key: idx for idx, key in enumerate(s)}
-        l, r = 0, 0
+        last = {c: i for i, c in enumerate(s)}
         res = []
+        start = end = 0
 
-        while r<len(s):
-            res.append(1)
-            ln = far_idx[s[l]]
-            r = res[-1]
-            while r<=ln:
-                if s[r] in far_idx and far_idx[s[r]]>ln:
-                    ln = far_idx[s[r]]
-                r+=1
-            res[-1] = r-l
-            l = r
+        for i, c in enumerate(s):
+            end = max(end, last[c])
+            if i == end:
+                res.append(end - start + 1)
+                start = i + 1
+
         return res
         
