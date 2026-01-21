@@ -1,42 +1,49 @@
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [1] * n
+    
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+    
+    def union(self, x, y):
+        rootX = self.find(x)
+        rootY = self.find(y)
+        
+        if rootX != rootY:
+            if self.rank[rootX] > self.rank[rootY]:
+                self.parent[rootY] = rootX
+            elif self.rank[rootX] < self.rank[rootY]:
+                self.parent[rootX] = rootY
+            else:
+                self.parent[rootY] = rootX
+                self.rank[rootX] += 1
+            return True
+        return False
+
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-        par = {}
-        la = len(accounts)
-        par_node = {i:i for i in range(la)}
-        res = {}
+        dsu = UnionFind(len(accounts))
+        email_to_acc_id = {}
 
-        def change_all_par(l_a, val):
-            nonlocal par
-            for i in l_a:
-                par[i] = val
-
-        for _ in range(la):
-            for i in range(la):
-                tmp_node = i
-                for j in range(1, len(accounts[i])):
-                    tmp_e = accounts[i][j]
-                    if tmp_e not in par:
-                        par[tmp_e] = i
-                    else:
-                        tmp_node = min(tmp_node, par[tmp_e])
-                if tmp_node != i:
-                    change_all_par(accounts[i][1:], tmp_node)
-                par_node[i] = tmp_node
-
-        for k, v in par_node.items():
-            if (accounts[k][0], v) not in res:
-                res[(accounts[k][0], v)] = set(accounts[k][1:])
-                continue
+        for i, account in enumerate(accounts):
+            for email in account[1:]:
+                if email in email_to_acc_id:
+                    dsu.union(i, email_to_acc_id[email])
+                else:
+                    email_to_acc_id[email] = i
+        
+        merged_emails = defaultdict(list)
+        
+        for email, owner_id in email_to_acc_id.items():
+            root_id = dsu.find(owner_id)
+            merged_emails[root_id].append(email)
+        
+        res = []
+        for root_id, emails in merged_emails.items():
+            name = accounts[root_id][0]
+            res.append([name] + sorted(emails))
             
-            res[(accounts[k][0], v)].update(accounts[k][1:])
-
-        
-        return [[k[0]] + sorted(list(v)) for k, v in res.items()]
-
-
-
-        
-        
-        
-
-        
+        return res
