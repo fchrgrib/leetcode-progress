@@ -9,7 +9,7 @@ class Solution:
             
             tmp = par[s]
             while tmp!=par[tmp]:
-                tmp = par[tmp]
+                tmp = find_par(tmp)
             return tmp
         
         def union_find(a, b):
