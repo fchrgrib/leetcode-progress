@@ -1,41 +1,27 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        l1 = len(s1)
-        l2 = len(s2)
-        sum_a = Counter(s1)
-        tmp = sum_a.copy()
-        set_val = set(list(s1))
+        # My thought for this problem is using counter for each s1 and s2 and compare each other
+        # if the counter is same, for example {a:2, b:2} in each s1 and s2 it will return True and if its not, it will return zero
+        c_s1 = Counter(s1)
+        l_s1 = len(s1)
+        c_s2 = {}
 
-        if l2<l1:
-            return False
-        
-        l= 0
-        r = 0
-
-        while r<l2:
-            if s2[r] in tmp:
-                tmp[s2[r]]-=1
-                if tmp[s2[r]] == 0:
-                    del tmp[s2[r]]
-                if not tmp:
-                    return True
+        for index, i in enumerate(s2):
+            if i in c_s2:
+                c_s2[i] += 1
             else:
-                if s2[r] in set_val:
-                    while l<r and s2[l] != s2[r]:
-                        if s2[l] in set_val:
-                            if s2[l] in tmp:
-                                tmp[s2[l]]+=1
-                            else:
-                                tmp[s2[l]]=1
-                        l+=1
-                    l+=1
-                    r+=1
-                    continue
-                tmp = sum_a.copy()
-                l=r
-            r+=1
+                c_s2[i] = 1
+            
+            if index>l_s1-1:
+                store = s2[index-l_s1]
+                c_s2[store]-=1
+                if c_s2[store]<=0:
+                    del c_s2[store]
+            
+            if c_s2 == c_s1:
+                return True
 
         return False
-        
+
 
         
