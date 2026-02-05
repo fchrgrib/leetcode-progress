@@ -15,9 +15,6 @@ class Solution:
             if tmp_x<y:
                 # print(f"ini tmp: ({tmp_x}, {tmp_y})")
                 # print(f"ini ril: ({x}, {y})")
-
-                dist_ril = abs(y-x)
-                dist_tmp = abs(tmp_y - tmp_x)
                 if y>tmp_y:
                     x, y = tmp_x, tmp_y
                 res+=1
