@@ -31,5 +31,6 @@ class Solution:
                             return count + 1
                         visited.add(j)
                         queue.append((j, count+1))
+                    del graph_w[w_f]
         return 0
         
