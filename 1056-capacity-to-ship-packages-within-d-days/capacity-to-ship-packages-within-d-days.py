@@ -1,8 +1,7 @@
 class Solution:
     def shipWithinDays(self, weights: List[int], days: int) -> int:
         l = max(weights)
-        r = sum(weights) + 1
-        res = float("inf")
+        r = sum(weights)
 
         def is_valid_days(amount):
             nonlocal weights, days
