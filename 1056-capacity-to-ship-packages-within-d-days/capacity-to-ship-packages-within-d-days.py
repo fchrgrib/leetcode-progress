@@ -22,19 +22,14 @@ class Solution:
             if tmp_amount>0:
                 count_days+=1
             return count_days
-        m = 0
-        while l<r:
-            m = (l+r)//2
-            
-            tmp = is_valid_days(m)
-            if tmp <= days:
-                res = min(res, m)
-
-            if tmp > days:
-                l = m+1
-            else:
+        while l < r:
+            m = (l + r) // 2
+            if is_valid_days(m) <= days:
                 r = m
-        return res
+            else:
+                l = m + 1
+
+        return l
 
         
 
