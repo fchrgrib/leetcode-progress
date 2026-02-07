@@ -13,6 +13,8 @@ class Solution:
             effort, coor = heapq.heappop(heap)
             x, y = coor
             curr = heights[x][y]
+            if effort>wg[x][y]:
+                continue
 
             for i in direct:
                 dx, dy = x + i[0], y + i[1]
