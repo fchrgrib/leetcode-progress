@@ -13,14 +13,9 @@ class Solution:
                 return f"{end}"
 
         for i in nums:
-            if not stack:
-                stack.append(i)
-                continue
-            if stack[-1] + 1 == i:
-                stack.append(i)
-            else:
+            if stack and not stack[-1] + 1 == i:
                 res.append(res_intv(stack))
-                stack.append(i)
+            stack.append(i)
         if stack:
             res.append(res_intv(stack))
         return res
