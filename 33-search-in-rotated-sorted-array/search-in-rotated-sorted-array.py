@@ -1,30 +1,20 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        l = 0
-        r = len(nums)-1
+        l, r = 0, len(nums) - 1
 
-        while l<=r:
+        if r == 0:
+            return r if nums[r] == target else -1
+
+        while l<r:
             m = (l+r)//2
-            t1 = m-1
-            t2 = m+1
-            
+
             if nums[m] == target:
                 return m
-            if nums[l] == target:
-                return l
-            if nums[r] == target:
-                return r
-
-            if (nums[m]>nums[r] and nums[r]>target) or (nums[l]>nums[m] and nums[l]<target) :
-                if nums[m]<target:
-                    r = t1
-                else:
-                    l = t2
+            if nums[l]<=nums[m]<target or nums[m]<target<=nums[r] or target<=nums[r]<nums[l]<=nums[m]:
+                l = m+1
             else:
-                if nums[m]<target:
-                    l = t2
-                else:
-                    r = t1
-        return -1
+                r = m
+
+        return l if nums[l] == target else -1
 
         
