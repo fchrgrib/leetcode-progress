@@ -15,7 +15,7 @@ class Solution:
             
             count_s[ord(s[i])-ord('a')]+=1
             
-            if count_s == count_p:
+            if i >= lp - 1 and count_s == count_p:
                 res.append(i-lp+1)
         return res
         
