@@ -18,13 +18,18 @@ class Solution:
         l, r = 0, 1
 
         while r<ln:
-            while (r<ln and abs(nums[r] - nums[l])<k) or (r+1<ln and nums[r] == nums[r+1]):
-                r+=1
-            while r<ln and l<r and abs(nums[r] - nums[l])>k:
-                l+=1
-            if r<ln and abs(nums[r]-nums[l]) == k:
-                res+=1
-            
-            r+=1
+            diff = nums[r] - nums[l]
+
+            if diff < k:
+                r += 1
+
+            elif diff > k:
+                l += 1
+
+            else:
+                res += 1
+                l += 1
+                while l < ln and nums[l] == nums[l-1]:
+                    l += 1
         return res
         
