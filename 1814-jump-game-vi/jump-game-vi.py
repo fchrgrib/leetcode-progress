@@ -15,7 +15,6 @@ class Solution:
             while queue and queue[0]<=i-k:
                 queue.popleft()
             queue.append(i)
-        print(dp)
         return dp[ln-1]
 
         
