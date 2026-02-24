@@ -17,15 +17,11 @@ class Solution:
             return 0
         mn = min(nums[start:end+1])
         mx = max(nums[start:end+1])
-        print(mn, mx)
-        print(nums[start], nums[end])
         while end+1<ln and nums[end+1]<mx:
             end+=1
         while start > 0 and nums[start-1] > mn:
             start -= 1
-        # print(nums[start], nums[end])
-        # for i in stack:
-        #     print(f"{nums[i]} ", end="")
+        print(start, end)
         return end-start+1
                 
         
