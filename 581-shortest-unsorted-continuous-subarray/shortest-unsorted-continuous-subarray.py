@@ -21,7 +21,6 @@ class Solution:
             end+=1
         while start > 0 and nums[start-1] > mn:
             start -= 1
-        print(start, end)
         return end-start+1
                 
         
