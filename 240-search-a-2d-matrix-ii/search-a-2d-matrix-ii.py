@@ -9,7 +9,9 @@ class Solution:
                 return visited[(i,j)]
             if i<row and j<col and matrix[i][j] == target:
                 return True
-            visited[(i, j)] = getTarget(i+1, j) or getTarget(i, j+1)
+            visited[(i, j)] = getTarget(i+1, j)
+            if not visited[(i,j)]:
+                visited[(i,j)] = getTarget(i, j+1)
             return visited[(i, j)]
         
         return getTarget(0,0)
