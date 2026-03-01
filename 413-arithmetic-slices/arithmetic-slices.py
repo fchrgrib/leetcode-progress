@@ -9,10 +9,8 @@ class Solution:
         
 
         for i in range(1, ln):
-            if prev != float("inf") and nums[i] - nums[i-1] != prev:
+            if nums[i] - nums[i-1] != prev:
                 l = i-1
-                prev = nums[i] - nums[i-1]
-            elif prev == float("inf"):
                 prev = nums[i] - nums[i-1]
             
             if i-l>=2:
