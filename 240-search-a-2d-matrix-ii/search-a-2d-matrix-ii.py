@@ -1,18 +1,15 @@
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         row, col = len(matrix), len(matrix[0])
-        visited = {}
-        def getTarget(i, j):
-            if i>=row or j>=col:
-                return False
-            if (i, j) in visited:
-                return visited[(i,j)]
-            if i<row and j<col and matrix[i][j] == target:
-                return True
-            visited[(i, j)] = getTarget(i+1, j)
-            if not visited[(i,j)]:
-                visited[(i,j)] = getTarget(i, j+1)
-            return visited[(i, j)]
+        r, c = 0, col - 1
         
-        return getTarget(0,0)
+        while r < row and c >= 0:
+            if matrix[r][c] == target:
+                return True
+            elif matrix[r][c] > target:
+                c -= 1
+            else:
+                r += 1
+        
+        return False
         
