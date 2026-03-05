@@ -4,9 +4,9 @@ class Solution:
 
         for i in asteroids:
             if i<0:
-                while stack and stack[-1]>=0 and stack[-1]<abs(i):
+                while stack and stack[-1]>=0 and stack[-1]<-i:
                     stack.pop()
-                if stack and stack[-1] == abs(i):
+                if stack and stack[-1] == -i:
                     stack.pop()
                     continue
                 if (stack and stack[-1]<0) or (not stack):
