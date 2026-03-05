@@ -8,7 +8,7 @@ class Solution:
             prefix_sum*=nums[r]
 
             while l<r and prefix_sum>=k:
-                prefix_sum/=nums[l]
+                prefix_sum//=nums[l]
                 l+=1
             if prefix_sum<k:
                 res+=(r-l+1)
