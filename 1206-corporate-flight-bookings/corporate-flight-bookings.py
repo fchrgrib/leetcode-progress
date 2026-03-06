@@ -1,6 +1,6 @@
 class Solution:
     def corpFlightBookings(self, bookings: List[List[int]], n: int) -> List[int]:
-        seats = defaultdict(int)
+        seats = [0] *(n+1)
         prefix_sum = 0
         res = [0] *n
 
