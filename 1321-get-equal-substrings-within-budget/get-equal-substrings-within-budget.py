@@ -7,7 +7,7 @@ class Solution:
 
         for r in range(len(s)):
             count_diff += abs(ord(s[r]) - ord(t[r]))
-            while l<len(s) and count_diff>maxCost:
+            while count_diff>maxCost:
                 count_diff-=(abs(ord(s[l]) - ord(t[l])))
                 l+=1
             res = max(res, r-l+1)
