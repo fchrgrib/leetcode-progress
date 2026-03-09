@@ -16,10 +16,7 @@ class Solution:
                 else:
                     lb[1]-=1
                 l+=1
-            if r-l+1 == lb[1]:
-                res = max(res, lb[1]-1)
-            else:
-                res = max(res, lb[1])
+            res = max(res, lb[1]- (1 if r-l+1 == lb[1] else 0))
         return res
 
         
