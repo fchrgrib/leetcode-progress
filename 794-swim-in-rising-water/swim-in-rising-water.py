@@ -29,7 +29,7 @@ class Solution:
             else:
                 l = m+1
             visited.clear()
-        return r
+        return l
                 
 
         
