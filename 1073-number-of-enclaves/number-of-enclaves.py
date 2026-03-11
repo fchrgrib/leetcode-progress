@@ -37,7 +37,6 @@ class Solution:
                     continue
                 grid[rw][i] = 2
                 bfs(rw, i)
-        print(grid)
         for i in range(row):
             for j in range(col):
                 if grid[i][j] != 1:
