@@ -1,46 +1,35 @@
 class Solution:
     def containsCycle(self, grid: List[List[str]]) -> bool:
         row, col = len(grid), len(grid[0])
-        rank = [[1 for _ in range(col)] for _ in range(row)]
-        parent = {(i, j):(i, j) for j in range(col) for i in range(row)}
-        direction = [(-1, 0), (0,-1)]
-        
-        def get_parent(coor):
-            tmp = parent[coor]
-            while tmp != parent[tmp]:
-                tmp = parent[tmp]
-            return tmp
-        
-        def union_find(coor1, coor2):
-            p1, p2 = get_parent(coor1), get_parent(coor2)
+        visited = [[0]*col for _ in range(row)]
+        direction = [(0,1),(1,0),(-1,0),(0,-1)]
 
-            x1, y1 = p1
-            x2, y2 = p2
+        def dfs(x, y, px, py):
+            visited[x][y] = 1
 
-            if rank[x1][y1] >= rank[x2][y2]:
-                rank[x1][y1]+=rank[x2][y2]
-                parent[p2] = p1
-            else:
-                rank[x2][y2]+=rank[x1][y1]
-                parent[p1] = p2
-        par = (-1, -1)
-        prev_parent = (-1, -1)
+            for dx, dy in direction:
+                nx, ny = x+dx, y+dy
+
+                if nx<0 or ny<0 or nx>=row or ny>=col:
+                    continue
+                if grid[nx][ny] != grid[x][y]:
+                    continue
+
+                if nx == px and ny == py:
+                    continue
+
+                if visited[nx][ny]:
+                    return True
+
+                if dfs(nx, ny, x, y):
+                    return True
+
+            return False
+
         for i in range(row):
             for j in range(col):
-                for x, y in direction:
-                    dx, dy = i+x, j+y
-                    if dx<0 or dy<0 or dx>=row or dy>=col:
-                        continue
-                    if grid[dx][dy] != grid[i][j]:
-                        continue
-                    par = get_parent((dx, dy))
-                    if par == prev_parent:
+                if not visited[i][j]:
+                    if dfs(i, j, -1, -1):
                         return True
-                    prev_parent = par
-                    union_find((dx, dy), (i, j))
-                par = (-1, -1)
-                prev_parent = (-1, -1)
-        return False
-        
 
-        
+        return False
