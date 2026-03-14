@@ -12,7 +12,6 @@ class Solution:
                 min_s+=1
             elif i>0 and nums[i] != nums[i-1]:
                 min_s = min(min_s, max(nums[i-1] - nums[i] + min(min_s,k) + 1, -k))
-            print(nums[i]+min_s, end=" ")
 
             if min_s<=k:
                 res+=1
