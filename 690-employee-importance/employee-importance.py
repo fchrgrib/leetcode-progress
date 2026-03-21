@@ -9,22 +9,22 @@ class Employee:
 
 class Solution:
     def getImportance(self, employees: List['Employee'], id: int) -> int:
-        visited = set()
+        # visited = set()
         res = 0
         queue = deque()
         graph = {employ.id : employ for employ in employees}
 
         queue.append(id)
-        visited.add(id)
+        # visited.add(id)
 
         while queue:
             emp = queue.popleft()
             res+=graph[emp].importance
 
             for employee in graph[emp].subordinates:
-                if employee in visited:
-                    continue
-                visited.add(employee)
+                # if employee in visited:
+                #     continue
+                # visited.add(employee)
                 queue.append(employee)
         return res
         
