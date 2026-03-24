@@ -4,7 +4,7 @@ class Solution:
         res = float("-inf")
 
         for num in arr:
-            dp[num] = max(dp.get(num-difference,0)+1, dp.get(num,0))
+            dp[num] = dp.get(num-difference,0)+1
             res = max(res, dp[num])
         return res
         
