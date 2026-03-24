@@ -2,7 +2,6 @@ class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
         row, col = len(matrix), len(matrix[0])
         dp = [[0 for _ in range(col)] for _ in range(row+1)]
-        res = float("inf")
 
         for i in range(1,row+1):
             for j in range(col):
@@ -15,7 +14,6 @@ class Solution:
                 else:
                     dp[i][j] = min(matrix[i-1][j] + dp[i-1][j], matrix[i-1][j] + dp[i-1][j+1], matrix[i-1][j] + dp[i-1][j-1])
                 
-                if i == row:
-                    res = min(res, dp[i][j])
-        return res
+
+        return min(dp[row])
         
