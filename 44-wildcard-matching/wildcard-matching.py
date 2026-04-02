@@ -15,17 +15,18 @@ class Solution:
                 return dp[store]
             if idx1 == ln1 and idx2 == ln2:
                 return True
+            if idx2 == ln2-1 and p[idx2] == "*":
+                return True
             if idx2 >= ln2:
                 return False
-            if idx1<ln1 and s[idx1] != p[idx2] and p[idx2] != "*" and p[idx2] != "?":
+            if idx1 < ln1 and s[idx1] != p[idx2] and p[idx2] != "*" and p[idx2] != "?":
                 return False
 
             dp[store] = False
             if idx1<ln1 and (s[idx1] == p[idx2] or p[idx2] == "?"):
                 dp[store] = backtrack(idx1+1, idx2+1)
                 return dp[store]
-            if p[idx2] != "*":
-                return False
+            
             for i in range(idx1, ln1+1):
                 while idx2<ln2 and p[idx2] == "*":
                     idx2+=1
