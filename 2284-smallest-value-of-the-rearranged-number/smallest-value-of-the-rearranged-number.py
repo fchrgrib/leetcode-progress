@@ -1,15 +1,15 @@
 class Solution:
     def smallestNumber(self, num: int) -> int:
-        if num>0:
-            get_str = sorted(list(str(num)))
-            idx = 0
-            while idx<len(get_str) and get_str[idx] == "0":
-                idx+=1
-            if idx!=0:
-                get_str[0], get_str[idx] = get_str[idx], get_str[0]
-            return int("".join(get_str))
-        elif num<0:
-            get_str = sorted(list(str(num)[1:]), reverse=True)
-            return -1*int("".join(get_str))
-        return 0
+        if num > 0:
+            s = sorted(str(num))
+            i = 0
+            while s[i] == '0':
+                i += 1
+            s[0], s[i] = s[i], s[0]
+            return int("".join(s))
         
+        if num < 0:
+            s = sorted(str(-num), reverse=True)
+            return -int("".join(s))
+        
+        return 0
