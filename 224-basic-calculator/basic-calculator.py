@@ -9,21 +9,18 @@ class Solution:
             if c.isdigit():
                 num = num*10+int(c)
             
-            if c == "(":
+            elif c == "(":
                 signs.append(sign*signs[-1])
                 sign = 1
-            if c == ")":
+            elif c == ")":
                 res+=(num*(sign*signs[-1]))
                 num = 0
                 signs.pop()
             
 
-            if c in "+-":
+            elif c in "+-":
                 res+=(num*(sign*signs[-1]))
-                if c == "+":
-                    sign = 1
-                else:
-                    sign = -1
+                sign = 1 if c == "+" else -1
                 num = 0
         return res + (sign*signs[-1])*num
                 
