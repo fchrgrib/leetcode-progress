@@ -13,9 +13,8 @@ class Solution:
                 signs.append(sign*signs[-1])
                 sign = 1
             if c == ")":
-                if num>0:
-                    res+=(num*(sign*signs[-1]))
-                    num = 0
+                res+=(num*(sign*signs[-1]))
+                num = 0
                 signs.pop()
             
 
